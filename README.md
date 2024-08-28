@@ -1,0 +1,1 @@
+# speding_management_proj

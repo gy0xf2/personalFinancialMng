@@ -1,4 +1,4 @@
-# financial_mng
+# financialmng
 
 A new Flutter project.
 

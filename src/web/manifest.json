@@ -1,6 +1,6 @@
 {
-    "name": "financial_mng",
-    "short_name": "financial_mng",
+    "name": "financialmng",
+    "short_name": "financialmng",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

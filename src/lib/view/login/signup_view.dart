@@ -2,6 +2,7 @@ import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/primary_button.dart';
 import 'package:financialmng/common_widget/round_textfield.dart';
 import 'package:financialmng/common_widget/secondary_button.dart';
+import 'package:financialmng/view/login/signin_view.dart';
 import 'package:flutter/material.dart';
 
 class SignUpView extends StatefulWidget {
@@ -111,7 +112,14 @@ class _SignUpViewState extends State<SignUpView> {
               height: 20,
             ),
             //sign in
-            SecondaryButton(title: 'Đăng nhập', onPressed: () {}),
+            SecondaryButton(
+                title: 'Đăng nhập',
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignInView()));
+                }),
           ],
         ),
       )),

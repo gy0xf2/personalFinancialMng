@@ -1,6 +1,7 @@
 import 'package:financialmng/common_widget/primary_button.dart';
 import 'package:financialmng/common_widget/secondary_button.dart';
-import 'package:financialmng/view/home/login/social_view_login.dart';
+import 'package:financialmng/view/login/signin_view.dart';
+import 'package:financialmng/view/login/social_view_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -48,7 +49,14 @@ class _WelcomeViewState extends State<WelcomeView> {
                 const SizedBox(
                   height: 20,
                 ),
-                SecondaryButton(title: 'Tôi đã có tài khoản', onPressed: () {})
+                SecondaryButton(
+                    title: 'Tôi đã có tài khoản',
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignInView()));
+                    })
               ],
             ),
           ))

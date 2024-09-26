@@ -1,6 +1,6 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/secondary_button.dart';
-import 'package:financialmng/view/home/login/signup_view.dart';
+import 'package:financialmng/view/login/signup_view.dart';
 import 'package:flutter/material.dart';
 
 class SocialViewLogin extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/view/home/home_view.dart';
+import 'package:financialmng/view/speding_budgets/spending_budget_view.dart';
 import 'package:flutter/material.dart';
 
 class MainTabView extends StatefulWidget {
@@ -56,7 +57,8 @@ class _MainTabViewState extends State<MainTabView> {
                                   onPressed: () {
                                     setState(() {
                                       selectedTab = 1;
-                                      currentTabView = Container();
+                                      currentTabView =
+                                          const SpendingBudgetView();
                                     });
                                   },
                                   icon: Image.asset(
@@ -105,7 +107,7 @@ class _MainTabViewState extends State<MainTabView> {
                       InkWell(
                         onTap: () {},
                         child: Container(
-                          margin: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(15),
                           decoration: BoxDecoration(boxShadow: [
                             BoxShadow(
                                 color: TColor.secondary.withOpacity(0.25),
@@ -114,8 +116,8 @@ class _MainTabViewState extends State<MainTabView> {
                           ], borderRadius: BorderRadius.circular(50)),
                           child: Image.asset(
                             'assets/img/center_btn.png',
-                            width: 55,
-                            height: 55,
+                            width: 60,
+                            height: 60,
                           ),
                         ),
                       )

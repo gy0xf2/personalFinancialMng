@@ -1,5 +1,7 @@
 import 'package:financialmng/common/color_extension.dart';
+import 'package:financialmng/common_widget/custom_arc_painter.dart';
 import 'package:financialmng/common_widget/segment_button.dart';
+import 'package:financialmng/common_widget/status_button.dart';
 import 'package:financialmng/common_widget/subscription_home_row.dart';
 import 'package:financialmng/common_widget/upcoming_bill.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +60,108 @@ class _HomeViewState extends State<HomeView> {
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(25),
                       bottomRight: Radius.circular(25))),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset('assets/img/home_bg.png'),
+                  Container(
+                    padding: EdgeInsets.only(bottom: media.width * 0.1),
+                    width: media.width * 0.7,
+                    height: media.width * 0.7,
+                    child: CustomPaint(
+                      painter: CustomArcPainter(end: 220),
+                    ),
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        'assets/img/phenikaa.png',
+                        width: media.width * 0.2,
+                        fit: BoxFit.contain,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        '\$1,8386',
+                        style: TextStyle(
+                            color: TColor.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        'This month bills',
+                        style: TextStyle(
+                            color: TColor.gray40,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                                color: TColor.border.withOpacity(0.15)),
+                            color: TColor.gray60.withOpacity(0.3),
+                          ),
+                          child: Text(
+                            'See your budget',
+                            style: TextStyle(
+                                color: TColor.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: StatusButton(
+                                    title: 'Active subs',
+                                    value: '12',
+                                    statusColor: TColor.secondary,
+                                    onPressed: () {})),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Expanded(
+                                child: StatusButton(
+                                    title: 'Highest subs',
+                                    value: '\$6.99',
+                                    statusColor: TColor.primary10,
+                                    onPressed: () {})),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Expanded(
+                                child: StatusButton(
+                                    title: 'Lowest sub',
+                                    value: '\$5.99',
+                                    statusColor: TColor.secondaryG,
+                                    onPressed: () {})),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

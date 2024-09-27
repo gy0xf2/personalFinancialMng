@@ -37,6 +37,11 @@ class _WelcomeViewState extends State<WelcomeView> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset(
+                  'assets/img/phenikaa.png',
+                  width: media.width * 0.3,
+                  fit: BoxFit.contain,
+                ),
                 const Spacer(),
                 PrimaryButton(
                     title: 'Bắt đầu!',

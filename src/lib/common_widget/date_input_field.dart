@@ -1,18 +1,19 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:flutter/material.dart';
 
-class RoundTextField extends StatelessWidget {
+class DateInputField extends StatelessWidget {
   final String label;
   final TextEditingController? controller;
-  final TextInputType? keyboardType;
   final bool obscureText;
-  const RoundTextField(
+  final IconData prefixIcon;
+  final VoidCallback onTap;
+  const DateInputField(
       {super.key,
       required this.label,
-      this.controller,
-      this.keyboardType,
+      required this.controller,
+      required this.prefixIcon,
+      required this.onTap,
       this.obscureText = false});
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,32 +25,40 @@ class RoundTextField extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-                fontSize: 14,
-                color: TColor.gray30,
+                fontSize: 12,
+                color: TColor.gray50,
                 fontWeight: FontWeight.w500),
           ),
         ),
         const SizedBox(
-          height: 4,
+          height: 6,
         ),
         Container(
           width: double.maxFinite,
-          height: 48,
+          height: 58,
           decoration: BoxDecoration(
               border: Border.all(
                 color: TColor.gray70,
               ),
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(12),
               color: TColor.gray60.withOpacity(0.05)),
-          child: TextField(
+          child: TextFormField(
+            onTap: onTap,
+            textAlign: TextAlign.start,
+            textAlignVertical: TextAlignVertical.center,
             style: TextStyle(
                 color: TColor.white, fontSize: 12, fontWeight: FontWeight.w500),
             controller: controller,
-            keyboardType: keyboardType,
+            readOnly: true,
             obscureText: obscureText,
-            decoration: const InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+            decoration: InputDecoration(
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15.0),
+                  child: Icon(
+                    prefixIcon,
+                    color: TColor.gray60,
+                  ),
+                ),
                 focusedBorder: InputBorder.none,
                 errorBorder: InputBorder.none,
                 enabledBorder: InputBorder.none),

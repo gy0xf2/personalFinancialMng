@@ -1,5 +1,4 @@
 import 'package:financialmng/common/color_extension.dart';
-import 'package:financialmng/view/login/welcome.dart';
 import 'package:financialmng/view/main_tab/main_tab_view.dart';
 import 'package:flutter/material.dart';
 

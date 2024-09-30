@@ -1,7 +1,10 @@
 import 'package:financialmng/common/color_extension.dart';
+import 'package:financialmng/view/add_transaction/add_transaction_view.dart';
+import 'package:financialmng/view/calendar/calendar_view.dart';
 import 'package:financialmng/view/home/home_view.dart';
 import 'package:financialmng/view/speding_budgets/spending_budget_view.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainTabView extends StatefulWidget {
   const MainTabView({super.key});
@@ -11,16 +14,16 @@ class MainTabView extends StatefulWidget {
 }
 
 class _MainTabViewState extends State<MainTabView> {
-  int selectedTab = 0;
+  int _selectedTab = 0;
   PageStorageBucket pageStorageBucket = PageStorageBucket();
-  Widget currentTabView = const HomeView();
+  Widget _currentTabView = const HomeView();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TColor.gray,
       body: Stack(
         children: [
-          PageStorage(bucket: pageStorageBucket, child: currentTabView),
+          PageStorage(bucket: pageStorageBucket, child: _currentTabView),
           SafeArea(
             child: Column(
               children: [
@@ -41,33 +44,31 @@ class _MainTabViewState extends State<MainTabView> {
                               IconButton(
                                   onPressed: () {
                                     setState(() {
-                                      selectedTab = 0;
-                                      currentTabView = const HomeView();
+                                      _selectedTab = 0;
+                                      _currentTabView = const HomeView();
                                     });
                                   },
-                                  icon: Image.asset(
-                                    'assets/img/home.png',
-                                    width: 20,
-                                    height: 20,
-                                    color: selectedTab == 0
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.house,
+                                    size: 20,
+                                    color: _selectedTab == 0
                                         ? TColor.white
-                                        : TColor.gray,
+                                        : TColor.gray40,
                                   )),
                               IconButton(
                                   onPressed: () {
                                     setState(() {
-                                      selectedTab = 1;
-                                      currentTabView =
+                                      _selectedTab = 1;
+                                      _currentTabView =
                                           const SpendingBudgetView();
                                     });
                                   },
-                                  icon: Image.asset(
-                                    'assets/img/budgets.png',
-                                    width: 20,
-                                    height: 20,
-                                    color: selectedTab == 1
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.list,
+                                    size: 20,
+                                    color: _selectedTab == 1
                                         ? TColor.white
-                                        : TColor.gray,
+                                        : TColor.gray40,
                                   )),
                               const SizedBox(
                                 width: 50,
@@ -75,39 +76,45 @@ class _MainTabViewState extends State<MainTabView> {
                               IconButton(
                                   onPressed: () {
                                     setState(() {
-                                      selectedTab = 2;
-                                      currentTabView = Container();
+                                      _selectedTab = 2;
+                                      _currentTabView = const CalendarView();
                                     });
                                   },
-                                  icon: Image.asset(
-                                    'assets/img/calendar.png',
-                                    width: 20,
-                                    height: 20,
-                                    color: selectedTab == 2
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.chartColumn,
+                                    size: 20,
+                                    color: _selectedTab == 2
                                         ? TColor.white
-                                        : TColor.gray,
+                                        : TColor.gray40,
                                   )),
                               IconButton(
                                   onPressed: () {
-                                    selectedTab = 3;
-                                    currentTabView = Container();
+                                    setState(() {
+                                      _selectedTab = 3;
+                                      _currentTabView = Container();
+                                    });
                                   },
-                                  icon: Image.asset(
-                                    'assets/img/creditcards.png',
-                                    width: 20,
-                                    height: 20,
-                                    color: selectedTab == 3
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.gear,
+                                    size: 20,
+                                    color: _selectedTab == 3
                                         ? TColor.white
-                                        : TColor.gray,
+                                        : TColor.gray40,
                                   )),
                             ],
                           )
                         ],
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AddTransactionView()));
+                        },
                         child: Container(
-                          margin: const EdgeInsets.all(15),
+                          margin: const EdgeInsets.all(10),
                           decoration: BoxDecoration(boxShadow: [
                             BoxShadow(
                                 color: TColor.secondary.withOpacity(0.25),
@@ -116,8 +123,8 @@ class _MainTabViewState extends State<MainTabView> {
                           ], borderRadius: BorderRadius.circular(50)),
                           child: Image.asset(
                             'assets/img/center_btn.png',
-                            width: 60,
-                            height: 60,
+                            width: 70,
+                            height: 70,
                           ),
                         ),
                       )

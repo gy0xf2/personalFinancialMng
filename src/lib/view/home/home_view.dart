@@ -2,9 +2,11 @@ import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/custom_arc_painter.dart';
 import 'package:financialmng/common_widget/segment_button.dart';
 import 'package:financialmng/common_widget/status_button.dart';
-import 'package:financialmng/common_widget/subscription_home_row.dart';
-import 'package:financialmng/common_widget/upcoming_bill.dart';
+import 'package:financialmng/list_builder/item/transaction.dart';
+import 'package:financialmng/list_builder/row_builder.dart';
+import 'package:financialmng/view/speding_budgets/spending_budget_view.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -14,36 +16,42 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  bool isSubscription = true;
-  List subArr = [
-    {"name": "Spotify", "icon": "assets/img/spotify_logo.png", "price": "5.99"},
-    {
-      "name": "YouTube Premium",
-      "icon": "assets/img/youtube_logo.png",
-      "price": "18.99"
-    },
-    {
-      "name": "Microsoft OneDrive",
-      "icon": "assets/img/onedrive_logo.png",
-      "price": "29.99"
-    },
-    {"name": "NetFlix", "icon": "assets/img/netflix_logo.png", "price": "15.00"}
+  bool _isExpense = true;
+  List expenseList = [
+    Transaction(
+        name: "Food",
+        icon: FontAwesomeIcons.burger,
+        color: Colors.orange.shade500,
+        date: DateTime.now(),
+        amount: 2.55),
+    Transaction(
+        name: "Shopping",
+        icon: FontAwesomeIcons.cartShopping,
+        color: Colors.greenAccent,
+        date: DateTime.now(),
+        amount: 2.55),
+    Transaction(
+        name: "Travel",
+        icon: FontAwesomeIcons.plane,
+        color: Colors.blue[300],
+        date: DateTime.now(),
+        amount: 2.55),
+    Transaction(
+        name: "Medical",
+        icon: FontAwesomeIcons.heartPulse,
+        color: Colors.pink[300],
+        date: DateTime.now(),
+        amount: 2.55)
   ];
 
-  List bilArr = [
-    {"name": "Spotify", "date": DateTime(2023, 07, 25), "price": "5.99"},
-    {
-      "name": "YouTube Premium",
-      "date": DateTime(2023, 07, 25),
-      "price": "18.99"
-    },
-    {
-      "name": "Microsoft OneDrive",
-      "date": DateTime(2023, 07, 25),
-      "price": "29.99"
-    },
-    {"name": "NetFlix", "date": DateTime(2023, 07, 25), "price": "15.00"}
-  ];
+  //functions
+  double _totalAmount() {
+    double sum = 0;
+    for (var transaction in expenseList) {
+      sum += transaction.amount;
+    }
+    return sum;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +77,7 @@ class _HomeViewState extends State<HomeView> {
                     width: media.width * 0.7,
                     height: media.width * 0.7,
                     child: CustomPaint(
-                      painter: CustomArcPainter(end: 220),
+                      painter: CustomArcPainter(end: 220, blurWidth: 6),
                     ),
                   ),
                   Column(
@@ -84,7 +92,7 @@ class _HomeViewState extends State<HomeView> {
                         height: 15,
                       ),
                       Text(
-                        '\$1,8386',
+                        '${_totalAmount().toString()}đ',
                         style: TextStyle(
                             color: TColor.white,
                             fontSize: 30,
@@ -103,25 +111,6 @@ class _HomeViewState extends State<HomeView> {
                       const SizedBox(
                         height: 25,
                       ),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                                color: TColor.border.withOpacity(0.15)),
-                            color: TColor.gray60.withOpacity(0.3),
-                          ),
-                          child: Text(
-                            'See your budget',
-                            style: TextStyle(
-                                color: TColor.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      )
                     ],
                   ),
                   Padding(
@@ -173,51 +162,29 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   Expanded(
                       child: SegmentButton(
-                          title: 'Hóa đơn hàng tháng',
-                          isActive: isSubscription,
+                          title: 'Chi tiêu',
+                          isActive: _isExpense,
                           onPressed: () {
                             setState(() {
-                              isSubscription = !isSubscription;
+                              _isExpense = !_isExpense;
                             });
                           })),
+                  const SizedBox(
+                    width: 4,
+                  ),
                   Expanded(
                       child: SegmentButton(
-                          title: 'Hóa đơn sắp tới',
-                          isActive: !isSubscription,
+                          title: 'Thu nhập',
+                          isActive: !_isExpense,
                           onPressed: () {
                             setState(() {
-                              isSubscription = !isSubscription;
+                              _isExpense = !_isExpense;
                             });
                           })),
                 ],
               ),
             ),
-            if (isSubscription)
-              ListView.builder(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: subArr.length,
-                itemBuilder: (context, index) {
-                  var subObject = subArr[index] as Map? ?? {};
-                  return SubscriptionHomeRow(
-                      subObject: subObject, onPressed: () {});
-                },
-              ),
-            if (!isSubscription)
-              ListView.builder(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: subArr.length,
-                itemBuilder: (context, index) {
-                  var subObject = bilArr[index] as Map? ?? {};
-                  return UpComingBillRow(
-                      subObject: subObject, onPressed: () {});
-                },
-              ),
+            if (_isExpense) RowBuilder(transactionList: expenseList),
             const SizedBox(
               height: 110,
             )

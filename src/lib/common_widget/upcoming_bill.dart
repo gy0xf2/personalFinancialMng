@@ -1,5 +1,6 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class UpComingBillRow extends StatelessWidget {
   final Map subObject;
@@ -36,14 +37,14 @@ class UpComingBillRow extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Jun',
+                      DateFormat.MMMM().format(subObject['date']),
                       style: TextStyle(
                           color: TColor.gray30,
                           fontSize: 10,
                           fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      '25',
+                      subObject['date'].day.toString(),
                       style: TextStyle(
                           color: TColor.gray30,
                           fontSize: 10,

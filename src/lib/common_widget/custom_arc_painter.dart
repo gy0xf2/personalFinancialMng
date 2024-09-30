@@ -22,17 +22,17 @@ class CustomArcPainter extends CustomPainter {
 
     Paint activePaint = Paint()..shader = gradientColor.createShader(rect);
     activePaint.style = PaintingStyle.stroke;
-    activePaint.strokeWidth = 15;
+    activePaint.strokeWidth = width;
     activePaint.strokeCap = StrokeCap.round;
 
     Paint backgroundPaint = Paint();
     backgroundPaint.color = TColor.gray60.withOpacity(0.5);
     backgroundPaint.style = PaintingStyle.stroke;
-    backgroundPaint.strokeWidth = 15;
+    backgroundPaint.strokeWidth = 10;
     backgroundPaint.strokeCap = StrokeCap.round;
 
     Paint shadowPaint = Paint()
-      ..color = TColor.secondary.withOpacity(0.02)
+      ..color = TColor.secondary.withOpacity(0.2)
       ..style = PaintingStyle.stroke
       ..strokeWidth = width + blurWidth
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5);

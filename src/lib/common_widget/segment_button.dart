@@ -22,7 +22,7 @@ class SegmentButton extends StatelessWidget {
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(color: TColor.border.withOpacity(0.15)),
-                color: TColor.gray60.withOpacity(0.2),
+                color: TColor.gray40.withOpacity(0.3),
               )
             : null,
         child: Text(

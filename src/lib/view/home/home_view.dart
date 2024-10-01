@@ -1,12 +1,12 @@
+import 'dart:math';
+
 import 'package:financialmng/common/color_extension.dart';
-import 'package:financialmng/common_widget/custom_arc_painter.dart';
-import 'package:financialmng/common_widget/segment_button.dart';
-import 'package:financialmng/common_widget/status_button.dart';
-import 'package:financialmng/list_builder/item/transaction.dart';
+import 'package:financialmng/common_widget/button/segment_button.dart';
 import 'package:financialmng/list_builder/row_builder.dart';
-import 'package:financialmng/view/speding_budgets/spending_budget_view.dart';
+import 'package:financialmng/provider/data_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -17,139 +17,160 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   bool _isExpense = true;
-  List expenseList = [
-    Transaction(
-        name: "Food",
-        icon: FontAwesomeIcons.burger,
-        color: Colors.orange.shade500,
-        date: DateTime.now(),
-        amount: 2.55),
-    Transaction(
-        name: "Shopping",
-        icon: FontAwesomeIcons.cartShopping,
-        color: Colors.greenAccent,
-        date: DateTime.now(),
-        amount: 2.55),
-    Transaction(
-        name: "Travel",
-        icon: FontAwesomeIcons.plane,
-        color: Colors.blue[300],
-        date: DateTime.now(),
-        amount: 2.55),
-    Transaction(
-        name: "Medical",
-        icon: FontAwesomeIcons.heartPulse,
-        color: Colors.pink[300],
-        date: DateTime.now(),
-        amount: 2.55)
-  ];
-
-  //functions
-  double _totalAmount() {
-    double sum = 0;
-    for (var transaction in expenseList) {
-      sum += transaction.amount;
-    }
-    return sum;
-  }
 
   @override
   Widget build(BuildContext context) {
+    final dataProvider = Provider.of<DataProvider>(context);
     var media = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: TColor.gray,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: media.width * 1.1,
-              decoration: BoxDecoration(
-                  color: TColor.gray70.withOpacity(0.7),
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(25),
-                      bottomRight: Radius.circular(25))),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset('assets/img/home_bg.png'),
-                  Container(
-                    padding: EdgeInsets.only(bottom: media.width * 0.1),
-                    width: media.width * 0.7,
-                    height: media.width * 0.7,
-                    child: CustomPaint(
-                      painter: CustomArcPainter(end: 220, blurWidth: 6),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
+              child: Container(
+                //style for the credit card
+                width: media.width,
+                height: media.width / 2,
+                decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(25),
+                    gradient: LinearGradient(colors: [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.secondary,
+                      Theme.of(context).colorScheme.tertiary,
+                    ], transform: const GradientRotation(pi / 4)),
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 4,
+                          color: TColor.gray10.withOpacity(0.3),
+                          offset: const Offset(5, 5))
+                    ]),
+                //elements inside credit card
+                child: Column(
+                  //this column contain balance, income, expense
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    //elements inside the card
+                    Text(
+                      'Tháng ${DateTime.now().month}',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: TColor.white,
+                          fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Image.asset(
-                        'assets/img/phenikaa.png',
-                        width: media.width * 0.2,
-                        fit: BoxFit.contain,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        '${_totalAmount().toString()}đ',
-                        style: TextStyle(
-                            color: TColor.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        'This month bills',
-                        style: TextStyle(
-                            color: TColor.gray40,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        const Spacer(),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: StatusButton(
-                                    title: 'Active subs',
-                                    value: '12',
-                                    statusColor: TColor.secondary,
-                                    onPressed: () {})),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Expanded(
-                                child: StatusButton(
-                                    title: 'Highest subs',
-                                    value: '\$6.99',
-                                    statusColor: TColor.primary10,
-                                    onPressed: () {})),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Expanded(
-                                child: StatusButton(
-                                    title: 'Lowest sub',
-                                    value: '\$5.99',
-                                    statusColor: TColor.secondaryG,
-                                    onPressed: () {})),
-                          ],
-                        ),
-                      ],
+                    //space between balance label and balance amount
+                    const SizedBox(
+                      height: 12,
                     ),
-                  )
-                ],
+                    Text(
+                      '${dataProvider.totalTransaction()} giao dịch',
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: TColor.white,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      //element contains income and expense informations
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 20.0),
+                      child: Row(
+                        //a row to contain income and expense
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 25,
+                                height: 25,
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white10),
+                                child: const Center(
+                                  child: Icon(
+                                    CupertinoIcons.arrow_down,
+                                    size: 14,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Thu nhập',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: TColor.white,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    '${dataProvider.totalIncome()}đ',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: TColor.white,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                width: 25,
+                                height: 25,
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white10),
+                                child: const Center(
+                                  child: Icon(
+                                    CupertinoIcons.arrow_up,
+                                    size: 14,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Chi tiêu',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: TColor.white,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    '${dataProvider.totalExpense()}đ',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: TColor.white,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Container(
@@ -184,7 +205,8 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
             ),
-            if (_isExpense) RowBuilder(transactionList: expenseList),
+            if (_isExpense) RowBuilder(transactionList: dataProvider.expenses),
+            if (!_isExpense) RowBuilder(transactionList: dataProvider.incomes),
             const SizedBox(
               height: 110,
             )

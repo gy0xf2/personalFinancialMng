@@ -1,10 +1,10 @@
 import 'package:financialmng/common/color_extension.dart';
-import 'package:financialmng/list_builder/item/transaction.dart';
+import 'package:financialmng/list_builder/item/transaction_type.dart';
 import 'package:flutter/material.dart';
 
-class TransactionItem extends StatelessWidget {
-  final Transaction transaction;
-  const TransactionItem({super.key, required this.transaction});
+class TransactionOption extends StatelessWidget {
+  final TransactionType transaction;
+  const TransactionOption({super.key, required this.transaction});
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +26,6 @@ class TransactionItem extends StatelessWidget {
               size: 30,
             ),
           ),
-          // Image.asset(
-          //   transaction['icon'],
-          //   width: media.width * 0.25,
-          //   height: media.width * 0.25,
-          //   fit: BoxFit.fitHeight,
-          // ),
           const SizedBox(
             height: 15,
           ),

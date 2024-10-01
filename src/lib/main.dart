@@ -1,9 +1,15 @@
 import 'package:financialmng/common/color_extension.dart';
+import 'package:financialmng/provider/data_provider.dart';
+import 'package:financialmng/view/login/welcome.dart';
 import 'package:financialmng/view/main_tab/main_tab_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (_) => DataProvider()..loadData(), // Load expenses once
+      child: const MyApp(),
+    ),);
 }
 
 class MyApp extends StatelessWidget {

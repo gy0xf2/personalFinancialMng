@@ -6,11 +6,13 @@ class RoundTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final IconData icon;
   const RoundTextField(
       {super.key,
       required this.label,
-      this.controller,
-      this.keyboardType,
+      required this.controller,
+      required this.keyboardType,
+      required this.icon,
       this.obscureText = false});
 
   @override
@@ -30,7 +32,7 @@ class RoundTextField extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 4,
+          height: 6,
         ),
         Container(
           width: double.maxFinite,
@@ -47,9 +49,12 @@ class RoundTextField extends StatelessWidget {
             controller: controller,
             keyboardType: keyboardType,
             obscureText: obscureText,
-            decoration: const InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+            decoration: InputDecoration(
+                prefixIcon: Icon(
+                  icon,
+                  size: 12,
+                  color: TColor.gray30,
+                ),
                 focusedBorder: InputBorder.none,
                 errorBorder: InputBorder.none,
                 enabledBorder: InputBorder.none),

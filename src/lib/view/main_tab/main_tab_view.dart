@@ -2,7 +2,7 @@ import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/view/add_transaction/add_transaction_view.dart';
 import 'package:financialmng/view/calendar/calendar_view.dart';
 import 'package:financialmng/view/home/home_view.dart';
-import 'package:financialmng/view/speding_budgets/spending_budget_view.dart';
+import 'package:financialmng/view/transaction_history/transaction_history.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -60,7 +60,7 @@ class _MainTabViewState extends State<MainTabView> {
                                     setState(() {
                                       _selectedTab = 1;
                                       _currentTabView =
-                                          const SpendingBudgetView();
+                                          const TransactionHistoryView();
                                     });
                                   },
                                   icon: FaIcon(

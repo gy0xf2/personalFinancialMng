@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:financialmng/common_widget/transaction_item.dart';
+import 'package:financialmng/list_builder/item/transaction_option.dart';
 import 'package:flutter/material.dart';
 
 class SliderBuilder extends StatefulWidget {
@@ -40,7 +40,7 @@ class _SliderBuilderState extends State<SliderBuilder> {
           itemBuilder: (BuildContext context, int index, int pageViewIndex) {
             var transaction = widget.transactionList[index];
 
-            return TransactionItem(transaction: transaction);
+            return TransactionOption(transaction: transaction);
           },
         ));
   }

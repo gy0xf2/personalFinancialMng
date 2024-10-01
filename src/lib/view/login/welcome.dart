@@ -1,5 +1,5 @@
-import 'package:financialmng/common_widget/primary_button.dart';
-import 'package:financialmng/common_widget/secondary_button.dart';
+import 'package:financialmng/common_widget/button/primary_button.dart';
+import 'package:financialmng/common_widget/button/secondary_button.dart';
 import 'package:financialmng/view/login/signin_view.dart';
 import 'package:financialmng/view/login/social_view_login.dart';
 import 'package:flutter/material.dart';

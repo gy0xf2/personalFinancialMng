@@ -1,9 +1,10 @@
 import 'package:financialmng/common/color_extension.dart';
-import 'package:financialmng/common_widget/primary_button.dart';
-import 'package:financialmng/common_widget/round_textfield.dart';
-import 'package:financialmng/common_widget/secondary_button.dart';
+import 'package:financialmng/common_widget/button/primary_button.dart';
+import 'package:financialmng/common_widget/input_field/round_textfield.dart';
+import 'package:financialmng/common_widget/button/secondary_button.dart';
 import 'package:financialmng/view/login/signup_view.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -27,6 +28,7 @@ class _SignInViewState extends State<SignInView> {
           children: [
             const Spacer(),
             RoundTextField(
+              icon: FontAwesomeIcons.at,
               label: 'Địa chỉ email',
               controller: txtEmail,
               keyboardType: TextInputType.emailAddress,
@@ -35,6 +37,7 @@ class _SignInViewState extends State<SignInView> {
               height: 15,
             ),
             RoundTextField(
+              icon: FontAwesomeIcons.key,
               label: 'Mật khẩu',
               controller: txtPassword,
               obscureText: true,

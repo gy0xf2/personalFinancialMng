@@ -6,11 +6,8 @@ import 'package:financialmng/common_widget/input_field/input_field.dart';
 import 'package:financialmng/common_widget/button/primary_button.dart';
 import 'package:financialmng/common_widget/button/segment_button.dart';
 import 'package:financialmng/list_builder/item/transaction_item.dart';
-import 'package:financialmng/list_builder/item/transaction_type.dart';
 import 'package:financialmng/list_builder/slider_builder.dart';
 import 'package:financialmng/provider/data_provider.dart';
-import 'package:financialmng/view/main_tab/main_tab_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -24,77 +21,15 @@ class AddTransactionView extends StatefulWidget {
 }
 
 class _AddTransactionViewState extends State<AddTransactionView> {
+  //variables
   int _currentExpenseIndex = 0;
   int _currentIncomeIndex = 0;
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   bool _isExpense = true;
-  List expenseList = [
-    TransactionType(
-      name: "Food",
-      icon: FontAwesomeIcons.burger,
-      color: Colors.orange.shade500,
-    ),
-    TransactionType(
-      name: "Shopping",
-      icon: FontAwesomeIcons.cartShopping,
-      color: Colors.greenAccent,
-    ),
-    TransactionType(
-      name: "Entertainment",
-      icon: FontAwesomeIcons.gamepad,
-      color: Colors.blueGrey,
-    ),
-    TransactionType(
-      name: "Petrol",
-      icon: FontAwesomeIcons.gasPump,
-      color: Colors.pink[200],
-    ),
-    TransactionType(
-      name: "Travel",
-      icon: FontAwesomeIcons.plane,
-      color: Colors.blue[300],
-    ),
-    TransactionType(
-      name: "Medical",
-      icon: FontAwesomeIcons.heartPulse,
-      color: Colors.pink[300],
-    ),
-    TransactionType(
-      name: "Others",
-      icon: CupertinoIcons.ellipsis_circle_fill,
-      color: Colors.grey,
-    )
-  ];
-  List incomeList = [
-    TransactionType(
-      name: "Achievement",
-      icon: FontAwesomeIcons.medal,
-      color: Colors.orange[500],
-    ),
-    TransactionType(
-      name: "Salary",
-      icon: FontAwesomeIcons.coins,
-      color: Colors.greenAccent,
-    ),
-    TransactionType(
-      name: "Sales",
-      icon: FontAwesomeIcons.salesforce,
-      color: Colors.blue[300],
-    ),
-    TransactionType(
-      name: "Gift",
-      icon: FontAwesomeIcons.gift,
-      color: Colors.pink[300],
-    ),
-    TransactionType(
-      name: "Others",
-      icon: CupertinoIcons.ellipsis_circle_fill,
-      color: Colors.grey,
-    )
-  ];
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -128,6 +63,32 @@ class _AddTransactionViewState extends State<AddTransactionView> {
     super.initState();
   }
 
+  void _saveTransaction() {
+    final dataProvider = Provider.of<DataProvider>(context, listen: false);
+
+    if (_isExpense) {
+      dataProvider.addExpense(TransactionItem(
+          type: true,
+          name: dataProvider.expensesType[_currentExpenseIndex].name,
+          icon: dataProvider.expensesType[_currentExpenseIndex].icon,
+          amount: double.parse(_amountController.text),
+          date: DateFormat('dd/MM/yyyy').parse(_dateController.text),
+          color: dataProvider.expensesType[_currentExpenseIndex].color,
+          note: _noteController.text));
+      Navigator.pop(context);
+      return;
+    }
+    dataProvider.addIncome(TransactionItem(
+        type: false,
+        name: dataProvider.incomesType[_currentIncomeIndex].name,
+        icon: dataProvider.incomesType[_currentIncomeIndex].icon,
+        amount: double.parse(_amountController.text),
+        date: DateFormat('dd/MM/yyyy').parse(_dateController.text),
+        color: dataProvider.incomesType[_currentIncomeIndex].color,
+        note: _noteController.text));
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final dataProvider = Provider.of<DataProvider>(context);
@@ -159,11 +120,7 @@ class _AddTransactionViewState extends State<AddTransactionView> {
                           children: [
                             IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const MainTabView()));
+                                  Navigator.pop(context);
                                 },
                                 icon: Image.asset(
                                   'assets/img/back.png',
@@ -182,8 +139,10 @@ class _AddTransactionViewState extends State<AddTransactionView> {
                             ),
                             Text(
                               'ADD NEW TRANSACTION',
-                              style:
-                                  TextStyle(fontSize: 13, color: TColor.gray10),
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: TColor.gray30,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -227,12 +186,12 @@ class _AddTransactionViewState extends State<AddTransactionView> {
                     ),
                     if (_isExpense)
                       SliderBuilder(
-                        transactionList: expenseList,
+                        transactionList: dataProvider.expensesType,
                         onIndexChanged: _onIndexChanged,
                       ),
                     if (!_isExpense)
                       SliderBuilder(
-                        transactionList: incomeList,
+                        transactionList: dataProvider.incomesType,
                         onIndexChanged: _onIndexChanged,
                       ),
                     const SizedBox(
@@ -275,35 +234,7 @@ class _AddTransactionViewState extends State<AddTransactionView> {
                           padding: const EdgeInsets.all(20),
                           child: PrimaryButton(
                               title: 'Save transaction info',
-                              onPressed: () {
-                                if (_isExpense) {
-                                  dataProvider.addExpense(TransactionItem(
-                                      type: true,
-                                      name: expenseList[_currentExpenseIndex]
-                                          .name,
-                                      icon: expenseList[_currentExpenseIndex]
-                                          .icon,
-                                      amount:
-                                          double.parse(_amountController.text),
-                                      date: DateFormat('dd/MM/yyyy')
-                                          .parse(_dateController.text),
-                                      color: expenseList[_currentExpenseIndex]
-                                          .color,
-                                      note: _noteController.text));
-                                  return;
-                                }
-                                dataProvider.addIncome(TransactionItem(
-                                    type: false,
-                                    name: incomeList[_currentIncomeIndex].name,
-                                    icon: incomeList[_currentIncomeIndex].icon,
-                                    amount:
-                                        double.parse(_amountController.text),
-                                    date: DateFormat('dd/MM/yyyy')
-                                        .parse(_dateController.text),
-                                    color:
-                                        incomeList[_currentIncomeIndex].color,
-                                    note: _noteController.text));
-                              }),
+                              onPressed: _saveTransaction),
                         ),
                       ]),
                     )

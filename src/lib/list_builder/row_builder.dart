@@ -1,4 +1,5 @@
-import 'package:financialmng/common_widget/transaction_row.dart';
+import 'package:financialmng/list_builder/item/transaction_row.dart';
+import 'package:financialmng/common_widget/transaction_view_info.dart';
 import 'package:flutter/material.dart';
 
 class RowBuilder extends StatefulWidget {
@@ -19,7 +20,15 @@ class _RowBuilderState extends State<RowBuilder> {
       itemCount: widget.transactionList.length,
       itemBuilder: (context, index) {
         var transaction = widget.transactionList[index];
-        return TransactionRow(transaction: transaction, onPressed: () {});
+        return TransactionRow(
+            transaction: transaction,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          TransactionViewInfo(transaction: transaction)));
+            });
       },
     );
   }

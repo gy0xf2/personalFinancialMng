@@ -7,13 +7,17 @@ class InputField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool obscureText;
   final IconData prefixIcon;
+  final double width;
+  final double height;
   const InputField(
       {super.key,
       required this.label,
       required this.controller,
       required this.keyboardType,
       required this.prefixIcon,
-      this.obscureText = false});
+      this.obscureText = false,
+      this.width = double.maxFinite,
+      this.height = 58});
 
   @override
   Widget build(BuildContext context) {

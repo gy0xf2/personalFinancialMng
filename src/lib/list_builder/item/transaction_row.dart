@@ -14,16 +14,17 @@ class TransactionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: 12.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
         onTap: onPressed,
         child: Container(
-          padding: const EdgeInsets.all(10),
-          height: 75,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          height: 65,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            color: TColor.gray70.withOpacity(0.35),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(color: TColor.border.withOpacity(0.15)),
           ),
           child: Row(
@@ -31,20 +32,16 @@ class TransactionRow extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                     color: transaction.color,
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(8)),
                 alignment: Alignment.center,
                 width: 40,
                 height: 40,
                 child: FaIcon(
                   transaction.icon,
                   color: TColor.white,
+                  size: 20,
                 ),
               ),
-              // Image.asset(
-              //   subObject['icon'],
-              //   width: 40,
-              //   height: 40,
-              // ),
               const SizedBox(
                 width: 10,
               ),

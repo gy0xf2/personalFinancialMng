@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 class SliderBuilder extends StatefulWidget {
   final List transactionList;
   final Function(int) onIndexChanged;
+  final int initPage;
   const SliderBuilder(
-      {super.key, required this.transactionList, required this.onIndexChanged});
+      {super.key,
+      required this.transactionList,
+      required this.onIndexChanged,
+      this.initPage = 0});
 
   @override
   State<SliderBuilder> createState() => _SliderBuilderState();
@@ -22,6 +26,7 @@ class _SliderBuilderState extends State<SliderBuilder> {
         height: media.width * 0.4,
         child: CarouselSlider.builder(
           options: CarouselOptions(
+            initialPage: widget.initPage,
             onPageChanged: (index, reason) {
               setState(() {
                 _currentIndex = index;

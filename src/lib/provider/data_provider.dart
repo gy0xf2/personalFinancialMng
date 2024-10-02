@@ -169,6 +169,7 @@ class DataProvider extends ChangeNotifier {
 
   void removeIncome(income) {
     _incomes.remove(income);
+    notifyListeners();
   }
 
   void modifyTransaction(type, index, transaction) {

@@ -36,9 +36,6 @@ class _TransactionViewInfoState extends State<TransactionViewInfo> {
     _transactionIndex = widget.transaction.type == true
         ? dataProvider.expenseItemIndexFind(widget.transaction)
         : dataProvider.incomeItemIndexFind(widget.transaction);
-
-    print(_transactionIndex);
-    print(_currentIndex);
   }
 
   @override

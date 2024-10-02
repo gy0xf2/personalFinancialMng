@@ -6,10 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
+  // WidgetsFlutterBinding.ensureInitialized();
+  // if (WebView.platform == null) {
+  //   WebView.platform = SurfaceAndroidWebView();
+  // }
+  runApp(
+    ChangeNotifierProvider(
       create: (_) => DataProvider()..loadData(), // Load expenses once
       child: const MyApp(),
-    ),);
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/view/add_transaction/add_transaction_view.dart';
-import 'package:financialmng/view/calendar/calendar_view.dart';
+import 'package:financialmng/view/chart_view/chart_view.dart';
 import 'package:financialmng/view/home/home_view.dart';
 import 'package:financialmng/view/transaction_history/transaction_history.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +77,7 @@ class _MainTabViewState extends State<MainTabView> {
                                   onPressed: () {
                                     setState(() {
                                       _selectedTab = 2;
-                                      _currentTabView = const CalendarView();
+                                      _currentTabView = const ChartView();
                                     });
                                   },
                                   icon: FaIcon(

@@ -26,6 +26,9 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(
+              height: 40,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

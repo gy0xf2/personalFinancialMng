@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
         child: Column(
           children: [
             const SizedBox(
-              height: 20,
+              height: 40,
             ),
             Padding(
               padding:

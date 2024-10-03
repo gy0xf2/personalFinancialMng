@@ -222,4 +222,25 @@ class DataProvider extends ChangeNotifier {
     return _incomes
         .indexWhere((transaction) => transaction.name == income.name);
   }
+
+  DateTime startOfWeek() {
+    int currentWeekday = DateTime.now().weekday; //obtain current weekday
+    return DateTime.now().subtract(
+        Duration(days: currentWeekday - 1)); //range between n and 1 is (n - 1)
+  }
+
+  DateTime endOfWeek() {
+    int currentWeekday = DateTime.now().weekday;
+    return DateTime.now().add(Duration(
+        days: 7 - currentWeekday)); //range between x and n is n - x (x <= n)
+  }
+
+  List fetchTransactionsThisWeek(type) {
+    return (type ? _expenses : _incomes).where((transaction) {
+      return transaction.date
+              .isAfter(startOfWeek().subtract(const Duration(seconds: 1))) &&
+          transaction.date
+              .isBefore(endOfWeek().add(const Duration(seconds: 1)));
+    }).toList();
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/button/segment_button.dart';
 import 'package:financialmng/provider/data_provider.dart';
+import 'package:financialmng/view/chart_view/item/chart_plot.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -70,6 +71,30 @@ class _ChartViewState extends State<ChartView> {
                 ],
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  _isExpense == true
+                      ? 'Your expense statistics'
+                      : 'Your income statistics',
+                  style: TextStyle(
+                      color: TColor.gray30,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600),
+                )
+              ],
+            ),
+            Container(
+              width: media.width,
+              height: media.width,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              child: ChartPlot(
+                  type: _isExpense,
+                  transactionList:
+                      dataProvider.fetchTransactionsThisWeek(_isExpense)),
+            )
           ],
         ),
       ),

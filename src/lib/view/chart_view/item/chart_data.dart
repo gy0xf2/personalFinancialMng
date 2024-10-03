@@ -1,15 +1,16 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class ChartData extends StatefulWidget {
-  const ChartData({super.key});
+// class ChartData extends StatefulWidget {
+//   final 
+//   const ChartData({super.key});
 
-  @override
-  State<ChartData> createState() => _ChartDataState();
-}
+//   @override
+//   State<ChartData> createState() => _ChartDataState();
+// }
 
-class _ChartDataState extends State<ChartData> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
+// class _ChartDataState extends State<ChartData> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Placeholder();
+//   }
+// }

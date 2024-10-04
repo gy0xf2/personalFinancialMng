@@ -1,15 +1,16 @@
 import 'package:financialmng/common/color_extension.dart';
+import 'package:financialmng/firebase_options.dart';
 import 'package:financialmng/provider/data_provider.dart';
 import 'package:financialmng/view/login/welcome.dart';
 import 'package:financialmng/view/main_tab/main_tab_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // if (WebView.platform == null) {
-  //   WebView.platform = SurfaceAndroidWebView();
-  // }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     ChangeNotifierProvider(
       create: (_) => DataProvider()..loadData(), // Load expenses once

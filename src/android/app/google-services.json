@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "93364609718",
+    "project_id": "personance-b772a",
+    "storage_bucket": "personance-b772a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93364609718:android:7c27a6b8c1619f0679fc17",
+        "android_client_info": {
+          "package_name": "com.example.financialmng"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhPoxbFqGgdGuTMrBlXE4xEF8RU52ZwSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93364609718:android:4de3f2ab3579f8ab79fc17",
+        "android_client_info": {
+          "package_name": "com.gy.personance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhPoxbFqGgdGuTMrBlXE4xEF8RU52ZwSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,5 @@
-import 'package:financialmng/list_builder/item/transaction_item.dart';
-import 'package:financialmng/list_builder/item/transaction_type.dart';
+import 'package:financialmng/transaction/item/transaction_item.dart';
+import 'package:financialmng/transaction/item/transaction_type.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,7 +20,7 @@ class DataProvider extends ChangeNotifier {
   Future<void> loadData() async {
     if (!_isDataLoaded) {
       // Simulate fetching data from a database or API
-      await Future.delayed(const Duration(seconds: 2)); // Simulate a delay
+      await Future.delayed(const Duration(seconds: 1)); // Simulate a delay
       _expenses = [
         TransactionItem(
             name: "Food",
@@ -28,28 +28,28 @@ class DataProvider extends ChangeNotifier {
             icon: FontAwesomeIcons.burger,
             color: Colors.orange.shade500,
             date: DateTime.now(),
-            amount: 2.55),
+            amount: 2),
         TransactionItem(
             name: "Shopping",
             type: true,
             icon: FontAwesomeIcons.cartShopping,
             color: Colors.greenAccent,
             date: DateTime.now(),
-            amount: 2.55),
+            amount: 2),
         TransactionItem(
             name: "Travel",
             type: true,
             icon: FontAwesomeIcons.plane,
             color: Colors.blue[300],
             date: DateTime.now(),
-            amount: 2.55),
+            amount: 2),
         TransactionItem(
             name: "Medical",
             type: true,
             icon: FontAwesomeIcons.heartPulse,
             color: Colors.pink[300],
             date: DateTime.now(),
-            amount: 2.55)
+            amount: 2)
       ];
       _incomes = [
         TransactionItem(
@@ -58,90 +58,90 @@ class DataProvider extends ChangeNotifier {
             icon: FontAwesomeIcons.medal,
             color: Colors.orange[500],
             date: DateTime.now(),
-            amount: 2.55),
+            amount: 2),
         TransactionItem(
             name: "Salary",
             type: false,
             icon: FontAwesomeIcons.coins,
             color: Colors.greenAccent,
             date: DateTime.now(),
-            amount: 2.55),
+            amount: 2),
         TransactionItem(
             name: "Sales",
             type: false,
             icon: FontAwesomeIcons.salesforce,
             color: Colors.blue[300],
             date: DateTime.now(),
-            amount: 2.55),
+            amount: 2),
         TransactionItem(
             name: "Gift",
             type: false,
             icon: FontAwesomeIcons.gift,
             color: Colors.pink[300],
             date: DateTime.now(),
-            amount: 2.55)
+            amount: 2)
       ];
 
       _expenseType = [
         TransactionType(
-          name: "Food",
+          name: "Thực phẩm",
           icon: FontAwesomeIcons.burger,
           color: Colors.orange.shade500,
         ),
         TransactionType(
-          name: "Shopping",
+          name: "Mua sắm",
           icon: FontAwesomeIcons.cartShopping,
           color: Colors.greenAccent,
         ),
         TransactionType(
-          name: "Entertainment",
+          name: "Giải trí",
           icon: FontAwesomeIcons.gamepad,
           color: Colors.blueGrey,
         ),
         TransactionType(
-          name: "Petrol",
+          name: "Xăng dầu",
           icon: FontAwesomeIcons.gasPump,
           color: Colors.pink[200],
         ),
         TransactionType(
-          name: "Travel",
+          name: "Đi lại",
           icon: FontAwesomeIcons.plane,
           color: Colors.blue[300],
         ),
         TransactionType(
-          name: "Medical",
+          name: "Y tế",
           icon: FontAwesomeIcons.heartPulse,
           color: Colors.pink[300],
         ),
         TransactionType(
-          name: "Others",
+          name: "Khoản khác",
           icon: CupertinoIcons.ellipsis_circle_fill,
           color: Colors.grey,
         )
       ];
       _incomeType = [
         TransactionType(
-          name: "Achievement",
+          name: "Giải thưởng",
           icon: FontAwesomeIcons.medal,
           color: Colors.orange[500],
         ),
         TransactionType(
-          name: "Salary",
+          name: "Lương",
           icon: FontAwesomeIcons.coins,
           color: Colors.greenAccent,
         ),
         TransactionType(
-          name: "Sales",
+          name: "Buôn bán",
           icon: FontAwesomeIcons.salesforce,
           color: Colors.blue[300],
         ),
         TransactionType(
-          name: "Gift",
+          name: "Quà tặng",
           icon: FontAwesomeIcons.gift,
           color: Colors.pink[300],
         ),
         TransactionType(
-          name: "Others",
+          name: "Khoản khác",
           icon: CupertinoIcons.ellipsis_circle_fill,
           color: Colors.grey,
         )

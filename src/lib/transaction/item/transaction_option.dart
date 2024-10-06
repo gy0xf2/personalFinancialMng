@@ -1,10 +1,10 @@
 import 'package:financialmng/common/color_extension.dart';
-import 'package:financialmng/list_builder/item/transaction_item.dart';
+import 'package:financialmng/transaction/item/transaction_type.dart';
 import 'package:flutter/material.dart';
 
-class TransactionInfo extends StatelessWidget {
-  final TransactionItem transaction;
-  const TransactionInfo({super.key, required this.transaction});
+class TransactionOption extends StatelessWidget {
+  final TransactionType transaction;
+  const TransactionOption({super.key, required this.transaction});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +13,6 @@ class TransactionInfo extends StatelessWidget {
       margin: const EdgeInsets.all(10.0),
       child: Column(
         children: [
-          const SizedBox(
-            height: 25,
-          ),
           Container(
             decoration: BoxDecoration(
                 color: transaction.color,
@@ -30,23 +27,13 @@ class TransactionInfo extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 15,
           ),
           Text(
             transaction.name,
             style: TextStyle(
-                fontSize: 32, fontWeight: FontWeight.w700, color: TColor.white),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            '${transaction.amount}đ',
-            style: TextStyle(
-                color: TColor.gray30,
-                fontSize: 18,
-                fontWeight: FontWeight.w700),
-          ),
+                fontSize: 12, fontWeight: FontWeight.w600, color: TColor.white),
+          )
         ],
       ),
     );

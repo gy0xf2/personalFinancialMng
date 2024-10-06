@@ -26,15 +26,12 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 40,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'TRANSACTION HISTORY',
+                  'LỊCH SỬ GIAO DỊCH',
                   style: TextStyle(
                       color: TColor.gray30,
                       fontSize: 13,
@@ -102,7 +99,7 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                                 fontWeight: FontWeight.w700),
                           ),
                           Text(
-                            "spent this month.",
+                            "đã chi tiêu trong tháng.",
                             style: TextStyle(
                                 color: TColor.gray30,
                                 fontSize: 12,
@@ -149,7 +146,7 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                                 fontWeight: FontWeight.w700),
                           ),
                           Text(
-                            "achieved this month.",
+                            "đã nhận được trong tháng.",
                             style: TextStyle(
                                 color: TColor.gray30,
                                 fontSize: 12,

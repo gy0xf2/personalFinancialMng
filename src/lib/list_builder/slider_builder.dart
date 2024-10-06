@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:financialmng/list_builder/item/transaction_option.dart';
+import 'package:financialmng/transaction/item/transaction_option.dart';
 import 'package:flutter/material.dart';
 
 class SliderBuilder extends StatefulWidget {

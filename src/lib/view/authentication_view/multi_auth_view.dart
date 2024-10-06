@@ -1,16 +1,16 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/button/secondary_button.dart';
-import 'package:financialmng/view/login/signup_view.dart';
+import 'package:financialmng/view/authentication_view/signup_view.dart';
 import 'package:flutter/material.dart';
 
-class SocialViewLogin extends StatefulWidget {
-  const SocialViewLogin({super.key});
+class MultiAuthView extends StatefulWidget {
+  const MultiAuthView({super.key});
 
   @override
-  State<SocialViewLogin> createState() => _SocialViewLoginState();
+  State<MultiAuthView> createState() => _MultiAuthViewState();
 }
 
-class _SocialViewLoginState extends State<SocialViewLogin> {
+class _MultiAuthViewState extends State<MultiAuthView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +21,26 @@ class _SocialViewLoginState extends State<SocialViewLogin> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Stack(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/');
+                        },
+                        icon: Image.asset(
+                          'assets/img/back.png',
+                          width: 18,
+                          height: 18,
+                          color: TColor.gray30,
+                        ))
+                  ],
+                )
+              ],
+            ),
             const Spacer(),
             //signup with google button
             InkWell(
@@ -117,10 +137,7 @@ class _SocialViewLoginState extends State<SocialViewLogin> {
             SecondaryButton(
                 title: 'Đăng ký bằng email',
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignUpView()));
+                  Navigator.pushNamed(context, '/sign-up');
                 }),
             const SizedBox(
               height: 10,

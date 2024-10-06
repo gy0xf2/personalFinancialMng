@@ -1,18 +1,18 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/button/segment_button.dart';
 import 'package:financialmng/provider/data_provider.dart';
-import 'package:financialmng/view/chart_view/item/chart_plot.dart';
+import 'package:financialmng/view/dashboard_view/statistics_view/item/chart_plot.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ChartView extends StatefulWidget {
-  const ChartView({super.key});
+class StatisticsView extends StatefulWidget {
+  const StatisticsView({super.key});
 
   @override
-  State<ChartView> createState() => _ChartViewState();
+  State<StatisticsView> createState() => _StatisticsViewState();
 }
 
-class _ChartViewState extends State<ChartView> {
+class _StatisticsViewState extends State<StatisticsView> {
   bool _isExpense = true;
   @override
   Widget build(BuildContext context) {
@@ -23,15 +23,12 @@ class _ChartViewState extends State<ChartView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 40,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'STATISTICS',
+                  'THỐNG KÊ LỊCH SỬ GIAO DỊCH',
                   style: TextStyle(
                       color: TColor.gray30,
                       fontSize: 13,
@@ -77,14 +74,17 @@ class _ChartViewState extends State<ChartView> {
               children: [
                 Text(
                   _isExpense == true
-                      ? 'Your expense statistics'
-                      : 'Your income statistics',
+                      ? 'Thống kê các khoản chi tiêu'
+                      : 'Thống kê các khoản thu nhập',
                   style: TextStyle(
                       color: TColor.gray30,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
                 )
               ],
+            ),
+            const SizedBox(
+              height: 30,
             ),
             Container(
               width: media.width,

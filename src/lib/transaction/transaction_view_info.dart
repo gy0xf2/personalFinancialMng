@@ -2,7 +2,7 @@ import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/button/primary_button.dart';
 import 'package:financialmng/common_widget/input_field/date_input_field.dart';
 import 'package:financialmng/common_widget/input_field/input_field.dart';
-import 'package:financialmng/list_builder/item/transaction_item.dart';
+import 'package:financialmng/transaction/item/transaction_item.dart';
 import 'package:financialmng/list_builder/slider_builder.dart';
 import 'package:financialmng/provider/data_provider.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +78,7 @@ class _TransactionViewInfoState extends State<TransactionViewInfo> {
             type: true,
             name: dataProvider.expensesType[_currentIndex].name,
             icon: dataProvider.expensesType[_currentIndex].icon,
-            amount: double.parse(_amountController.text),
+            amount: int.parse(_amountController.text),
             date: DateFormat('dd/MM/yyyy').parse(_dateController.text),
             color: dataProvider.expensesType[_currentIndex].color,
             note: _noteController.text));

@@ -146,7 +146,7 @@ class _ChartPlotState extends State<ChartPlot> {
     var style = TextStyle(
         color: TColor.gray30, fontSize: 11, fontWeight: FontWeight.w600);
     Widget label;
-    if (value <= 10) {
+    if (value > 0 && value <= 10) {
       if ((value ~/ 1 < 10) && (value ~/ 1) & 1 == 0) {
         label = Text(
           '${(value ~/ 1).toInt()}00',

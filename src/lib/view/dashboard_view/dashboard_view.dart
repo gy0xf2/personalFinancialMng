@@ -1,19 +1,19 @@
 import 'package:financialmng/common/color_extension.dart';
-import 'package:financialmng/view/add_transaction/add_transaction_view.dart';
-import 'package:financialmng/view/chart_view/chart_view.dart';
-import 'package:financialmng/view/home/home_view.dart';
-import 'package:financialmng/view/transaction_history/transaction_history.dart';
+import 'package:financialmng/view/dashboard_view/add_transaction_view/add_transaction_view.dart';
+import 'package:financialmng/view/dashboard_view/statistics_view/statistics_view.dart';
+import 'package:financialmng/view/dashboard_view/home/home_view.dart';
+import 'package:financialmng/view/dashboard_view/transaction_history_view/transaction_history.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class MainTabView extends StatefulWidget {
-  const MainTabView({super.key});
+class DashboardView extends StatefulWidget {
+  const DashboardView({super.key});
 
   @override
-  State<MainTabView> createState() => _MainTabViewState();
+  State<DashboardView> createState() => _DashboardViewState();
 }
 
-class _MainTabViewState extends State<MainTabView> {
+class _DashboardViewState extends State<DashboardView> {
   int _selectedTab = 0;
   PageStorageBucket pageStorageBucket = PageStorageBucket();
   Widget _currentTabView = const HomeView();
@@ -77,7 +77,7 @@ class _MainTabViewState extends State<MainTabView> {
                                   onPressed: () {
                                     setState(() {
                                       _selectedTab = 2;
-                                      _currentTabView = const ChartView();
+                                      _currentTabView = const StatisticsView();
                                     });
                                   },
                                   icon: FaIcon(

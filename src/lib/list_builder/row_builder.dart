@@ -1,5 +1,5 @@
-import 'package:financialmng/list_builder/item/transaction_row.dart';
-import 'package:financialmng/common_widget/transaction_view_info.dart';
+import 'package:financialmng/transaction/item/transaction_row.dart';
+import 'package:financialmng/transaction/transaction_view_info.dart';
 import 'package:flutter/material.dart';
 
 class RowBuilder extends StatefulWidget {

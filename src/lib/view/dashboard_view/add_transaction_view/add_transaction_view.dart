@@ -5,8 +5,9 @@ import 'package:financialmng/common_widget/input_field/date_input_field.dart';
 import 'package:financialmng/common_widget/input_field/input_field.dart';
 import 'package:financialmng/common_widget/button/primary_button.dart';
 import 'package:financialmng/common_widget/button/segment_button.dart';
-import 'package:financialmng/list_builder/item/transaction_item.dart';
+import 'package:financialmng/transaction/item/transaction_item.dart';
 import 'package:financialmng/list_builder/slider_builder.dart';
+import 'package:financialmng/message/notification_message.dart';
 import 'package:financialmng/provider/data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -71,10 +72,12 @@ class _AddTransactionViewState extends State<AddTransactionView> {
           type: true,
           name: dataProvider.expensesType[_currentExpenseIndex].name,
           icon: dataProvider.expensesType[_currentExpenseIndex].icon,
-          amount: double.parse(_amountController.text),
+          amount: int.parse(_amountController.text),
           date: DateFormat('dd/MM/yyyy').parse(_dateController.text),
           color: dataProvider.expensesType[_currentExpenseIndex].color,
           note: _noteController.text));
+      NotificationMessage.showNotificationMessage(
+          context, 'Thêm thành công', Colors.green[400], Icons.check_circle);
       Navigator.pop(context);
       return;
     }
@@ -82,7 +85,7 @@ class _AddTransactionViewState extends State<AddTransactionView> {
         type: false,
         name: dataProvider.incomesType[_currentIncomeIndex].name,
         icon: dataProvider.incomesType[_currentIncomeIndex].icon,
-        amount: double.parse(_amountController.text),
+        amount: int.parse(_amountController.text),
         date: DateFormat('dd/MM/yyyy').parse(_dateController.text),
         color: dataProvider.incomesType[_currentIncomeIndex].color,
         note: _noteController.text));
@@ -138,9 +141,9 @@ class _AddTransactionViewState extends State<AddTransactionView> {
                               height: 15,
                             ),
                             Text(
-                              'ADD NEW TRANSACTION',
+                              'THÊM GIAO DỊCH MỚI',
                               style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 14,
                                   color: TColor.gray30,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -233,7 +236,7 @@ class _AddTransactionViewState extends State<AddTransactionView> {
                         Padding(
                           padding: const EdgeInsets.all(20),
                           child: PrimaryButton(
-                              title: 'Save transaction info',
+                              title: 'Thêm giao dịch',
                               onPressed: _saveTransaction),
                         ),
                       ]),

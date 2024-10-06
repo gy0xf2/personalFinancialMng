@@ -1,10 +1,12 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/firebase_options.dart';
 import 'package:financialmng/provider/data_provider.dart';
-import 'package:financialmng/view/login/welcome.dart';
-import 'package:financialmng/view/main_tab/main_tab_view.dart';
+import 'package:financialmng/view/authentication_view/multi_auth_view.dart';
+import 'package:financialmng/view/authentication_view/signin_view.dart';
+import 'package:financialmng/view/authentication_view/signup_view.dart';
+import 'package:financialmng/view/authentication_view/welcome.dart';
+import 'package:financialmng/view/dashboard_view/dashboard_view.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,8 +28,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const WelcomeView(),
+        '/sign-in': (context) => const SignInView(),
+        '/sign-up': (context) => const SignUpView(),
+        '/multi-auth': (context) => const MultiAuthView(),
+        '/dashboard': (context) => const DashboardView(),
+      },
       title: 'Personance',
       debugShowCheckedModeBanner: false,
+      //
       theme: ThemeData(
         fontFamily: 'Inter',
         colorScheme: ColorScheme.fromSeed(
@@ -38,7 +49,7 @@ class MyApp extends StatelessWidget {
             secondary: TColor.secondary),
         useMaterial3: false,
       ),
-      home: const MainTabView(),
+      //
     );
   }
 }

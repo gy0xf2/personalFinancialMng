@@ -1,7 +1,7 @@
 import 'package:financialmng/common_widget/button/primary_button.dart';
 import 'package:financialmng/common_widget/button/secondary_button.dart';
-import 'package:financialmng/view/login/signin_view.dart';
-import 'package:financialmng/view/login/social_view_login.dart';
+import 'package:financialmng/view/authentication_view/signin_view.dart';
+import 'package:financialmng/view/authentication_view/multi_auth_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -46,10 +46,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                 PrimaryButton(
                     title: 'Bắt đầu!',
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SocialViewLogin()));
+                      Navigator.pushNamed(context, '/multi-auth');
                     }),
                 const SizedBox(
                   height: 20,
@@ -57,10 +54,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                 SecondaryButton(
                     title: 'Tôi đã có tài khoản',
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignInView()));
+                      Navigator.pushNamed(context, '/sign-in');
                     })
               ],
             ),

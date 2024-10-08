@@ -1,27 +1,22 @@
-import 'dart:math';
-
 import 'package:financialmng/common/color_extension.dart';
+import 'package:financialmng/provider/data_provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChartPlot extends StatefulWidget {
-  final List transactionList;
   final bool type;
 
-  const ChartPlot(
-      {super.key, required this.type, required this.transactionList});
+  const ChartPlot({super.key, required this.type});
 
   @override
   State<ChartPlot> createState() => _ChartPlotState();
 }
 
 class _ChartPlotState extends State<ChartPlot> {
-  Map<dynamic, dynamic> _transactionMerged = {};
-
   @override
-  void initState() {
-    super.initState();
-    _transactionMerged = _mergeTransaction();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   @override
@@ -29,12 +24,12 @@ class _ChartPlotState extends State<ChartPlot> {
     return BarChart(_chartPlot());
   }
 
-  Map<dynamic, dynamic> _mergeTransaction() {
+  Map<dynamic, dynamic> _mergeTransaction(type) {
     var res = {};
-    for (var transaction in widget.transactionList) {
+    for (var transaction in _fetchTransactionsThisWeek(type)) {
       //check whether weekday is exist in map, else: init
       if (!res.containsKey(transaction.date.weekday)) {
-        res[transaction.date.weekday] = transaction.amount;
+        res[transaction.date.weekday] = transaction.amount ?? 0.0;
         continue;
       }
       res[transaction.date.weekday] += transaction.amount;
@@ -66,22 +61,24 @@ class _ChartPlotState extends State<ChartPlot> {
                     getTitlesWidget: _getBottomTitles))));
   }
 
-  List<BarChartGroupData> _transactionData() => List.generate(7, (index) {
-        return _columnData(index + 1, _transactionMerged[index + 1] ?? 0.0);
-      });
+  List<BarChartGroupData> _transactionData() {
+    List<BarChartGroupData> res = [];
+    Map _transactionMerged = _mergeTransaction(widget.type);
+    for (int i = 1; i <= 7; ++i) {
+      res.add(_columnData(i, _transactionMerged[i] ?? 0.0));
+    }
+    return res;
+  }
 
   BarChartGroupData _columnData(int x, double y) {
     return BarChartGroupData(x: x, barRods: [
       BarChartRodData(
+          borderRadius: BorderRadius.circular(4),
           toY: y,
           width: 24,
-          gradient: LinearGradient(colors: [
-            Theme.of(context).colorScheme.primary,
-            Theme.of(context).colorScheme.secondary,
-            Theme.of(context).colorScheme.tertiary,
-          ], transform: const GradientRotation(pi / 4)),
+          color: Colors.grey.shade200,
           backDrawRodData: BackgroundBarChartRodData(
-              show: true, toY: 10, color: TColor.gray60))
+              show: true, toY: 1000, color: TColor.gray60))
     ]);
   }
 
@@ -144,15 +141,15 @@ class _ChartPlotState extends State<ChartPlot> {
 
   Widget _getLeftTitle(double value, TitleMeta meta) {
     var style = TextStyle(
-        color: TColor.gray30, fontSize: 11, fontWeight: FontWeight.w600);
+        color: TColor.gray30, fontSize: 9, fontWeight: FontWeight.w600);
     Widget label;
-    if (value > 0 && value <= 10) {
-      if ((value ~/ 1 < 10) && (value ~/ 1) & 1 == 0) {
+    if ((value > 0) && (value <= 1000)) {
+      if (((value ~/ 100) < 10) && (value ~/ 100) & 1 == 0) {
         label = Text(
-          '${(value ~/ 1).toInt()}00',
+          '${(value ~/ 100).toInt()}00',
           style: style,
         );
-      } else if (value ~/ 1 == 10) {
+      } else if ((value ~/ 100) == 10) {
         label = Text(
           '1M',
           style: style,
@@ -164,5 +161,27 @@ class _ChartPlotState extends State<ChartPlot> {
       label = const Text('');
     }
     return label;
+  }
+
+  DateTime _startOfWeek() {
+    DateTime now = DateTime.now();
+    return DateTime(now.year, now.month, now.day - now.weekday + 1, 0, 0, 0);
+  }
+
+  DateTime _endOfWeek() {
+    DateTime now = DateTime.now();
+    return DateTime(now.year, now.month, now.day + (7 - now.weekday), 0, 0, 0);
+  }
+
+  List _fetchTransactionsThisWeek(type) {
+    return (type
+            ? Provider.of<DataProvider>(context).expenses
+            : Provider.of<DataProvider>(context).incomes)
+        .where((transaction) {
+      return transaction.date
+              .isAfter(_startOfWeek().subtract(const Duration(seconds: 1))) &&
+          transaction.date
+              .isBefore(_endOfWeek().add(const Duration(seconds: 1)));
+    }).toList();
   }
 }

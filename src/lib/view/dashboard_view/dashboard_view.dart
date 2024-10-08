@@ -1,5 +1,6 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/view/dashboard_view/add_transaction_view/add_transaction_view.dart';
+import 'package:financialmng/view/dashboard_view/settings/setting_view.dart';
 import 'package:financialmng/view/dashboard_view/statistics_view/statistics_view.dart';
 import 'package:financialmng/view/dashboard_view/home/home_view.dart';
 import 'package:financialmng/view/dashboard_view/transaction_history_view/transaction_history.dart';
@@ -91,7 +92,7 @@ class _DashboardViewState extends State<DashboardView> {
                                   onPressed: () {
                                     setState(() {
                                       _selectedTab = 3;
-                                      _currentTabView = Container();
+                                      _currentTabView = const SettingView();
                                     });
                                   },
                                   icon: FaIcon(

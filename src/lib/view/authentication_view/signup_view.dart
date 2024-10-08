@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, use_build_context_synchronously
 
 import 'package:financialmng/auth/firebase_authentication.dart';
 import 'package:financialmng/common/color_extension.dart';

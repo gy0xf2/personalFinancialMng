@@ -5,7 +5,6 @@ import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/button/primary_button.dart';
 import 'package:financialmng/common_widget/input_field/round_textfield.dart';
 import 'package:financialmng/common_widget/button/secondary_button.dart';
-import 'package:financialmng/view/authentication_view/signup_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

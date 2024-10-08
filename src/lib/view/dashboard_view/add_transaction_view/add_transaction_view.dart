@@ -64,31 +64,40 @@ class _AddTransactionViewState extends State<AddTransactionView> {
     super.initState();
   }
 
-  void _saveTransaction() {
+  Future<void> _saveTransaction() async {
+    if (_amountController.text == '') {
+      NotificationMessage.showNotificationMessage(context,
+          'Vui lòng điền đủ thông tin!', Colors.red.shade700, Icons.error);
+      return;
+    }
     final dataProvider = Provider.of<DataProvider>(context, listen: false);
 
     if (_isExpense) {
-      dataProvider.addExpense(TransactionItem(
-          type: true,
-          name: dataProvider.expensesType[_currentExpenseIndex].name,
-          icon: dataProvider.expensesType[_currentExpenseIndex].icon,
-          amount: int.parse(_amountController.text),
-          date: DateFormat('dd/MM/yyyy').parse(_dateController.text),
-          color: dataProvider.expensesType[_currentExpenseIndex].color,
-          note: _noteController.text));
-      NotificationMessage.showNotificationMessage(
-          context, 'Thêm thành công', Colors.green[400], Icons.check_circle);
+      dataProvider.addExpense(
+          TransactionItem(
+              id: '',
+              type: true,
+              name: dataProvider.expensesType[_currentExpenseIndex].name,
+              icon: dataProvider.expensesType[_currentExpenseIndex].icon,
+              amount: double.parse(_amountController.text),
+              date: DateFormat('dd/MM/yyyy').parse(_dateController.text),
+              color: dataProvider.expensesType[_currentExpenseIndex].color,
+              note: _noteController.text),
+          context);
       Navigator.pop(context);
       return;
     }
-    dataProvider.addIncome(TransactionItem(
-        type: false,
-        name: dataProvider.incomesType[_currentIncomeIndex].name,
-        icon: dataProvider.incomesType[_currentIncomeIndex].icon,
-        amount: int.parse(_amountController.text),
-        date: DateFormat('dd/MM/yyyy').parse(_dateController.text),
-        color: dataProvider.incomesType[_currentIncomeIndex].color,
-        note: _noteController.text));
+    dataProvider.addIncome(
+        TransactionItem(
+            id: '',
+            type: false,
+            name: dataProvider.incomesType[_currentIncomeIndex].name,
+            icon: dataProvider.incomesType[_currentIncomeIndex].icon,
+            amount: double.parse(_amountController.text),
+            date: DateFormat('dd/MM/yyyy').parse(_dateController.text),
+            color: dataProvider.incomesType[_currentIncomeIndex].color,
+            note: _noteController.text),
+        context);
     Navigator.pop(context);
   }
 
@@ -205,7 +214,7 @@ class _AddTransactionViewState extends State<AddTransactionView> {
                           vertical: 12, horizontal: 16),
                       child: Column(children: [
                         InputField(
-                          label: 'Amount',
+                          label: 'Số tiền (đơn vị tính: trăm k)',
                           controller: _amountController,
                           keyboardType: TextInputType.number,
                           prefixIcon: FontAwesomeIcons.dollarSign,
@@ -214,7 +223,7 @@ class _AddTransactionViewState extends State<AddTransactionView> {
                           height: 15,
                         ),
                         DateInputField(
-                          label: 'Date',
+                          label: 'Ngày/tháng/năm',
                           controller: _dateController,
                           onTap: () => _selectDate(context),
                           prefixIcon: FontAwesomeIcons.clock,
@@ -223,7 +232,7 @@ class _AddTransactionViewState extends State<AddTransactionView> {
                           height: 15,
                         ),
                         InputField(
-                          label: 'Note',
+                          label: 'Ghi chú',
                           controller: _noteController,
                           obscureText: false,
                           keyboardType: TextInputType.text,

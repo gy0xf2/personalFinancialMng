@@ -92,7 +92,7 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                       Column(
                         children: [
                           Text(
-                            "${dataProvider.totalExpense()}đ",
+                            "${dataProvider.totalExpense()}k",
                             style: TextStyle(
                                 color: TColor.white,
                                 fontSize: 20,
@@ -139,7 +139,7 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
                       Column(
                         children: [
                           Text(
-                            "${dataProvider.totalIncome()}đ",
+                            "${dataProvider.totalIncome()}k",
                             style: TextStyle(
                                 color: TColor.white,
                                 fontSize: 20,

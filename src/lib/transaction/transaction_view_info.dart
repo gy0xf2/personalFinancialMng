@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/button/primary_button.dart';
 import 'package:financialmng/common_widget/input_field/date_input_field.dart';
 import 'package:financialmng/common_widget/input_field/input_field.dart';
+import 'package:financialmng/message/notification_message.dart';
 import 'package:financialmng/transaction/item/transaction_item.dart';
 import 'package:financialmng/list_builder/slider_builder.dart';
 import 'package:financialmng/provider/data_provider.dart';
@@ -24,7 +27,6 @@ class _TransactionViewInfoState extends State<TransactionViewInfo> {
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
 
   @override
   void didChangeDependencies() {
@@ -69,19 +71,26 @@ class _TransactionViewInfoState extends State<TransactionViewInfo> {
     });
   }
 
-  void _saveTransactionInfo() {
+  Future<void> _saveTransactionInfo() async {
+    if (_amountController.text == '') {
+      NotificationMessage.showNotificationMessage(context,
+          'Vui lòng điền đủ thông tin!', Colors.red.shade700, Icons.error);
+      return;
+    }
     final dataProvider = Provider.of<DataProvider>(context, listen: false);
-    dataProvider.modifyTransaction(
+    await dataProvider.modifyTransaction(
         widget.transaction.type,
         _transactionIndex,
         TransactionItem(
+            id: widget.transaction.id,
             type: true,
             name: dataProvider.expensesType[_currentIndex].name,
             icon: dataProvider.expensesType[_currentIndex].icon,
-            amount: int.parse(_amountController.text),
+            amount: double.parse(_amountController.text),
             date: DateFormat('dd/MM/yyyy').parse(_dateController.text),
             color: dataProvider.expensesType[_currentIndex].color,
-            note: _noteController.text));
+            note: _noteController.text),
+        context);
     Navigator.pop(context);
     return;
   }
@@ -129,7 +138,7 @@ class _TransactionViewInfoState extends State<TransactionViewInfo> {
                                     color: TColor.gray30,
                                   )),
                               Text(
-                                'TRANSACTION INFO',
+                                'THÔNG TIN GIAO DỊCH',
                                 style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
@@ -138,13 +147,13 @@ class _TransactionViewInfoState extends State<TransactionViewInfo> {
                               IconButton(
                                   onPressed: () {
                                     if (widget.transaction.type) {
-                                      dataProvider
-                                          .removeExpense(widget.transaction);
+                                      dataProvider.removeExpense(
+                                          widget.transaction, context);
                                       Navigator.pop(context);
                                       return;
                                     }
-                                    dataProvider
-                                        .removeIncome(widget.transaction);
+                                    dataProvider.removeIncome(
+                                        widget.transaction, context);
                                     Navigator.pop(context);
                                   },
                                   icon: Image.asset(
@@ -171,7 +180,7 @@ class _TransactionViewInfoState extends State<TransactionViewInfo> {
                       child: Column(
                         children: [
                           InputField(
-                            label: 'Amount',
+                            label: 'Số tiền (đơn vị tính: trăm k)',
                             controller: _amountController,
                             keyboardType: TextInputType.number,
                             prefixIcon: FontAwesomeIcons.dollarSign,
@@ -181,7 +190,7 @@ class _TransactionViewInfoState extends State<TransactionViewInfo> {
                             height: 15,
                           ),
                           DateInputField(
-                            label: 'Date',
+                            label: 'Ngày/tháng/năm',
                             controller: _dateController,
                             onTap: () => _selectDate(context),
                             prefixIcon: FontAwesomeIcons.clock,
@@ -190,7 +199,7 @@ class _TransactionViewInfoState extends State<TransactionViewInfo> {
                             height: 15,
                           ),
                           InputField(
-                            label: 'Note',
+                            label: 'Ghi chú',
                             controller: _noteController,
                             obscureText: false,
                             keyboardType: TextInputType.text,
@@ -203,7 +212,7 @@ class _TransactionViewInfoState extends State<TransactionViewInfo> {
                           Padding(
                             padding: const EdgeInsets.all(20),
                             child: PrimaryButton(
-                                title: 'Save transaction info',
+                                title: 'Lưu thông tin giao dịch',
                                 onPressed: _saveTransactionInfo),
                           ),
                         ],

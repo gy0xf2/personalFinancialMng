@@ -71,7 +71,7 @@ class TransactionRow extends StatelessWidget {
                 ),
               ),
               Text(
-                "${transaction.amount}đ",
+                "${transaction.amount}k",
                 style: TextStyle(
                     color: TColor.white,
                     fontSize: 12,

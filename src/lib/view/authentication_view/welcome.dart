@@ -1,7 +1,5 @@
 import 'package:financialmng/common_widget/button/primary_button.dart';
 import 'package:financialmng/common_widget/button/secondary_button.dart';
-import 'package:financialmng/view/authentication_view/signin_view.dart';
-import 'package:financialmng/view/authentication_view/multi_auth_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

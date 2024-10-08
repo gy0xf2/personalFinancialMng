@@ -1,9 +1,7 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/button/segment_button.dart';
-import 'package:financialmng/provider/data_provider.dart';
 import 'package:financialmng/view/dashboard_view/statistics_view/item/chart_plot.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class StatisticsView extends StatefulWidget {
   const StatisticsView({super.key});
@@ -14,9 +12,9 @@ class StatisticsView extends StatefulWidget {
 
 class _StatisticsViewState extends State<StatisticsView> {
   bool _isExpense = true;
+
   @override
   Widget build(BuildContext context) {
-    final dataProvider = Provider.of<DataProvider>(context);
     var media = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: TColor.gray,
@@ -90,10 +88,7 @@ class _StatisticsViewState extends State<StatisticsView> {
               width: media.width,
               height: media.width,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              child: ChartPlot(
-                  type: _isExpense,
-                  transactionList:
-                      dataProvider.fetchTransactionsThisWeek(_isExpense)),
+              child: ChartPlot(type: _isExpense),
             )
           ],
         ),

@@ -21,6 +21,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final dataProvider = Provider.of<DataProvider>(context);
+
     var media = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: TColor.gray,
@@ -113,7 +114,7 @@ class _HomeViewState extends State<HomeView> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    '${dataProvider.totalIncome()}đ',
+                                    '${dataProvider.totalIncome()}k',
                                     style: TextStyle(
                                         fontSize: 13,
                                         color: TColor.white,
@@ -153,7 +154,7 @@ class _HomeViewState extends State<HomeView> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    '${dataProvider.totalExpense()}đ',
+                                    '${dataProvider.totalExpense()}k',
                                     style: TextStyle(
                                         fontSize: 13,
                                         color: TColor.white,

@@ -1,6 +1,5 @@
 import 'package:financialmng/common/color_extension.dart';
 import 'package:financialmng/common_widget/button/secondary_button.dart';
-import 'package:financialmng/view/authentication_view/signup_view.dart';
 import 'package:flutter/material.dart';
 
 class MultiAuthView extends StatefulWidget {
